@@ -16,3 +16,12 @@
 .save {
   width: 50px;
 }
+
+.card-footer {
+  padding: 0;
+  height: 1.5rem;
+}
+
+/* .activity {
+  background: lightslategray;
+} */
