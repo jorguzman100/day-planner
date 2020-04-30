@@ -4,7 +4,7 @@ $(document).ready(function () {
     {
       time: "8 am",
       activity: "Activity at 9 am",
-      button: "Button1",
+      button: "<i class='far fa-save'></i>",
     },
     {
       time: "9 am",
@@ -94,7 +94,7 @@ $(document).ready(function () {
                     </div>
                     <input type="text" class="activity form-control" placeholder="" value="${activitiesArray[index].activity}">
                     <div class="input-group-append">
-                      <button class="save btn btn-info" type="button" data-index="${index}">${activitiesArray[index].button}</button>
+                      <button class="save btn btn-info" type="button" data-index="${index}"><i class="far fa-save"></i></button>
                     </div>
                   </div>`;
       $("#activities").append(divActWrap);
