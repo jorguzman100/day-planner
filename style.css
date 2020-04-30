@@ -8,6 +8,11 @@
   height: 1.5rem;
 }
 
+.card-header {
+  background-color: #d1ecf1;
+  font-weight: bold;
+}
+
 /* ----------------- Month View ----------------- */
 .table {
   font-size: 0.6rem;

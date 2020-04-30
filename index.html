@@ -17,14 +17,33 @@
 
 <body>
   <h1>Personal Agenda</h1>
-
+  <!-- Container -->
   <div class="container">
     <div class="row row-cols-1 row-cols-lg-2">
+      <div class="col">
 
-      <!-- Monthly Calendar -->
-
-      <div class="col month_calendar">
         <!-- Goals -->
+        <div class="row mb-4">
+          <div class="col goalsSetter">
+            <div class="card text-center">
+              <div class="card-header">
+                My Goals
+              </div>
+              <div class="card-body">
+                <div id="goals" style="display: block;">
+
+                </div>
+              </div>
+              <div class="card-footer text-muted">
+                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: none;">
+                  <strong>Activity saved</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /Goals -->
+
+        <!-- Month View -->
         <div class="row mb-4">
           <div class="col goalsSetter">
             <div class="card text-center">
@@ -36,7 +55,7 @@
                   <table class="table table-bordered ">
                     <thead class="thead-light">
                       <tr>
-                        <div class="date alert alert-primary m-0 p-0" role="alert" style="display: block;">
+                        <div class="date alert alert-info m-0 p-0" role="alert" style="display: block;">
                           <span id="prevY">
                             <i class="fas fa-angle-double-left"></i>
                           </span>
@@ -124,39 +143,16 @@
                 </div>
               </div>
               <div class="card-footer text-muted">
-                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: block;">
+                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: none;">
                   <strong>Activity saved</strong>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-
+        </div> <!-- /Month View -->
       </div>
 
-
       <div class="col goals_and_daylyPlanner">
-        <!-- Goals -->
-        <div class="row mb-4">
-          <div class="col goalsSetter">
-            <div class="card text-center">
-              <div class="card-header">
-                My Goals
-              </div>
-              <div class="card-body">
-                <div id="goals" style="display: block;">
-
-                </div>
-              </div>
-              <div class="card-footer text-muted">
-                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: block;">
-                  <strong>Activity saved</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- Daily Planner -->
         <div class="row">
@@ -167,7 +163,6 @@
               </div>
               <div class="card-body">
                 <div id="activities" style="display: none;">
-
                 </div>
               </div>
               <div class="card-footer text-muted">
@@ -180,18 +175,19 @@
         </div> <!-- /Daily Planner -->
       </div>
     </div>
+  </div> <!-- /Container -->
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/e211982880.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/e211982880.js" crossorigin="anonymous"></script>
 
-    <!-- Moments.js -->
-    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+  <!-- Moments.js -->
+  <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 
-    <!-- Main js -->
-    <script src="./script.js"></script>
+  <!-- Main js -->
+  <script src="./script.js"></script>
 </body>
 
 </html>
