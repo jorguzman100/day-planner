@@ -1,12 +1,18 @@
-/* Temp */
-div {
-  border: gray solid 3px;
-}
-/* Temp */
-div {
-  border: gray solid 3px;
-}
+/* ----------------- Temp ----------------- */
+/* div {
+  border: lightgrey solid 0.2px;
+} */
 
 .row {
-  min-height: 200px;
+  /* min-height: 200px; */
+}
+
+/* ---------------------------------------- */
+
+.time {
+  width: 70px;
+}
+
+.save {
+  width: 90px;
 }
