@@ -83,8 +83,10 @@ $(document).ready(function () {
                     </div>
                   </div>`;
       $("#activities").append(divActWrap);
+
+      // Assign backgrpund format according to time of the day
       agendaHour = parseInt(index + 8);
-      var current = moment().hour() - 10;
+      var current = moment().hour();
       console.log($("#activities").children().eq(index).children().eq(1));
       if (current > agendaHour) {
         console.log("Current: ", current, "Agenda: ", agendaHour);
