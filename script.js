@@ -2,69 +2,69 @@ $(document).ready(function () {
   /* ---------- Global variables ---------- */
   var activitiesArray = [
     {
-      time: "8 am",
-      activity: "Activity at 9 am",
+      time: moment().startOf("day").add(8, "hours").format("h:mm a"),
+      activity: "",
       button: "<i class='far fa-save'></i>",
     },
     {
-      time: "9 am",
-      activity: "Activity at 10 am",
-      button: "Button2",
-    },
-    {
-      time: "10 am",
-      activity: "Activity at 11 am",
-      button: "Button3",
-    },
-    {
-      time: "11 am",
-      activity: "Activity at 12 pm",
-      button: "Button4",
-    },
-    {
-      time: "12 pm",
+      time: moment().startOf("day").add(9, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='far fa-save'></i>",
     },
     {
-      time: "1 pm",
+      time: moment().startOf("day").add(10, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='far fa-save'></i>",
     },
     {
-      time: "2 pm",
+      time: moment().startOf("day").add(11, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='fas fa-user-shield'></i>",
     },
     {
-      time: "3 pm",
+      time: moment().startOf("day").add(12, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='fas fa-user-shield'></i>",
     },
     {
-      time: "4 pm",
+      time: moment().startOf("day").add(13, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='fas fa-user-shield'></i>",
     },
     {
-      time: "5 pm",
+      time: moment().startOf("day").add(14, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='fas fa-user-shield'></i>",
     },
     {
-      time: "6 pm",
+      time: moment().startOf("day").add(15, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='far fa-save'></i>",
     },
     {
-      time: "7 pm",
+      time: moment().startOf("day").add(16, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='far fa-save'></i>",
     },
     {
-      time: "8 pm",
+      time: moment().startOf("day").add(17, "hours").format("h:mm a"),
       activity: "",
-      button: "Button",
+      button: "<i class='far fa-save'></i>",
+    },
+    {
+      time: moment().startOf("day").add(18, "hours").format("h:mm a"),
+      activity: "",
+      button: "<i class='far fa-save'></i>",
+    },
+    {
+      time: moment().startOf("day").add(19, "hours").format("h:mm a"),
+      activity: "",
+      button: "<i class='far fa-save'></i>",
+    },
+    {
+      time: moment().startOf("day").add(20, "hours").format("h:mm a"),
+      activity: "",
+      button: "<i class='far fa-save'></i>",
     },
   ];
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
                     </div>
                     <input type="text" class="activity form-control" placeholder="" value="${activitiesArray[index].activity}">
                     <div class="input-group-append">
-                      <button class="save btn btn-info" type="button" data-index="${index}"><i class="far fa-save"></i></button>
+                      <button class="save btn btn-info" type="button" data-index="${index}">${activitiesArray[index].button}</button>
                     </div>
                   </div>`;
       $("#activities").append(divActWrap);
@@ -113,7 +113,7 @@ $(document).ready(function () {
       .eq(0)
       .text();
     var activity = $("#activities").children().eq(index).children().eq(1).val();
-    var button = $(this).text();
+    var button = $(this).html();
     var activityWrap = {
       time: time,
       activity: activity,
