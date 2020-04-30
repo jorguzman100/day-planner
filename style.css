@@ -22,6 +22,19 @@
   height: 1.5rem;
 }
 
-/* .activity {
-  background: lightslategray;
-} */
+.table {
+  font-size: 0.6rem;
+}
+
+.table th {
+  padding: 5px;
+}
+
+.table td {
+  padding: 3px;
+  text-align: left;
+}
+
+td span {
+  padding-right: 5px;
+}

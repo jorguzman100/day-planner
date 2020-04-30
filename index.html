@@ -19,12 +19,132 @@
   <h1>Personal Agenda</h1>
 
   <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
-      <div class="col month_calendar">Month Calendar</div>
-      <div class="col goals_and_daylyPlanner">
-        <div class="row">
-          <div class="col goals">Goals</div>
+    <div class="row row-cols-1 row-cols-lg-2">
+
+      <!-- Monthly Calendar -->
+
+      <div class="col month_calendar">
+        <!-- Goals -->
+        <div class="row mb-4">
+          <div class="col goalsSetter">
+            <div class="card text-center">
+              <div class="card-header">
+                Month View
+              </div>
+              <div class="card-body p-2">
+                <div id="goals" style="display: block;">
+                  <table class="table table-bordered ">
+                    <thead class="thead-light">
+                      <tr>
+                        <div class="month alert alert-primary m-0 p-0" role="alert" style="display: block;">
+                          Month
+                        </div>
+                      </tr>
+                      <tr>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1</span></td>
+                        <td><span>2</span></td>
+                        <td><span>3</span></td>
+                        <td><span>4</span></td>
+                        <td><span>5</span></td>
+                        <td><span>6</span></td>
+                        <td><span>7</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                        <td><span>x</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer text-muted">
+                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: block;">
+                  <strong>Activity saved</strong>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+
+      </div>
+
+
+      <div class="col goals_and_daylyPlanner">
+        <!-- Goals -->
+        <div class="row mb-4">
+          <div class="col goalsSetter">
+            <div class="card text-center">
+              <div class="card-header">
+                My Goals
+              </div>
+              <div class="card-body">
+                <div id="goals" style="display: block;">
+
+                </div>
+              </div>
+              <div class="card-footer text-muted">
+                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: block;">
+                  <strong>Activity saved</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Planner -->
         <div class="row">
           <div class="col daylyPlanner">
             <div class="card text-center">
@@ -43,7 +163,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> <!-- /Daily Planner -->
       </div>
     </div>
 

@@ -53,9 +53,19 @@ $(document).ready(function () {
     },
   ];
 
-  /* ---------- Event listeners ---------- */
   init();
+  /* ---------- Event listeners ---------- */
+
   $(".save").on("click", saveActivity);
+  $("td").mouseenter(function () {
+    $(this).css("background", "lightgray");
+  });
+  $("td").mouseleave(function () {
+    $(this).css("background", "white");
+  });
+  $("td").on("click", function () {
+    console.log($(this).text());
+  });
 
   /* ---------- Function declarations ---------- */
   function init() {
@@ -87,9 +97,7 @@ $(document).ready(function () {
       // Assign backgrpund format according to time of the day
       agendaHour = parseInt(index + 8);
       var current = moment().hour();
-      console.log($("#activities").children().eq(index).children().eq(1));
       if (current > agendaHour) {
-        console.log("Current: ", current, "Agenda: ", agendaHour);
         $("#activities")
           .children()
           .eq(index)
@@ -97,7 +105,6 @@ $(document).ready(function () {
           .eq(1)
           .css("background", "#e2e3e5");
       } else if (current === agendaHour) {
-        console.log("Current: ", current, "Agenda: ", agendaHour);
         $("#activities")
           .children()
           .eq(index)
@@ -105,7 +112,6 @@ $(document).ready(function () {
           .eq(1)
           .css("background", "#bee5eb");
       } else {
-        console.log("Current: ", current, "Agenda: ", agendaHour);
         $("#activities")
           .children()
           .eq(index)
