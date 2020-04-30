@@ -52,6 +52,9 @@ $(document).ready(function () {
       button: "<i class='far fa-save'></i>",
     },
   ];
+  var currentMonth = moment();
+  var displayedDate = currentMonth;
+  var monthsChange = 1;
 
   init();
   /* ---------- Event listeners ---------- */
@@ -60,15 +63,24 @@ $(document).ready(function () {
   $("td").mouseenter(function () {
     $(this).css("background", "lightgray");
   });
+
   $("td").mouseleave(function () {
     $(this).css("background", "white");
   });
+
   $("td").on("click", function () {
     console.log($(this).text());
   });
 
+  $("#prevY").on("click", changeDate);
+  $("#nextY").on("click", changeDate);
+  $("#prevM").on("click", changeDate);
+  $("#nextM").on("click", changeDate);
+
   /* ---------- Function declarations ---------- */
   function init() {
+    $("#year").text(displayedDate.format("YYYY"));
+    $("#month").text(displayedDate.format("MMMM"));
     displayActivities();
   }
 
@@ -152,5 +164,25 @@ $(document).ready(function () {
     console.log(activitiesArray);
     activitiesArray[index] = activityWrap;
     console.log(activitiesArray);
+  }
+
+  function changeDate() {
+    switch ($(this).attr("id")) {
+      case "nextY":
+        displayedDate = displayedDate.add(1, "years");
+        break;
+      case "prevY":
+        displayedDate = displayedDate.subtract(1, "years");
+        break;
+      case "nextM":
+        displayedDate = displayedDate.add(1, "months");
+        break;
+      case "prevM":
+        displayedDate = displayedDate.subtract(1, "months");
+        break;
+    }
+    $("#year").text(displayedDate.format("YYYY"));
+    $("#month").text(displayedDate.format("MMMM"));
+    console.log(displayedDate.format("MMM Do YY"));
   }
 });

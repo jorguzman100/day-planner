@@ -1,27 +1,14 @@
 /* ----------------- Temp ----------------- */
-/* div {
-  border: lightgrey solid 0.2px;
-} */
-
-.row {
-  /* min-height: 200px; */
-}
 
 /* ---------------------------------------- */
 
-.time {
-  width: 100px;
-}
-
-.save {
-  width: 50px;
-}
-
+/* ----------------- Global ----------------- */
 .card-footer {
   padding: 0;
   height: 1.5rem;
 }
 
+/* ----------------- Month View ----------------- */
 .table {
   font-size: 0.6rem;
 }
@@ -37,4 +24,24 @@
 
 td span {
   padding-right: 5px;
+}
+
+.date {
+  font-size: 0.75rem;
+}
+
+.date span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ----------------- My Goals ----------------- */
+
+/* ----------------- Daily Planner ----------------- */
+.time {
+  min-width: 200px;
+}
+
+.save {
+  width: 50px;
 }
