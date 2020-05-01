@@ -40,11 +40,28 @@ td span {
   padding-right: 5px;
 }
 
+th {
+  font-size: 12px;
+}
+
+.dayNum {
+  font-size: 8px;
+  font-weight: bold;
+  color: #0c5460;
+  width: 22px;
+  height: 10px;
+}
+
+.dayText {
+  font-size: 10px;
+  color: #0c5460;
+}
+
 /* ----------------- My Goals ----------------- */
 
 /* ----------------- Daily Planner ----------------- */
 .time {
-  min-width: 200px;
+  min-width: 100px;
 }
 
 .save {

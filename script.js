@@ -54,6 +54,8 @@ $(document).ready(function () {
   ];
   var currentMonth = moment();
   var displayedDate = currentMonth;
+  var firstWeekDay;
+  var startCell;
 
   init();
 
@@ -164,32 +166,93 @@ $(document).ready(function () {
     }
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
-    console.log(displayedDate.format("MMM Do YY"));
+    createTBody();
   }
 
-  function createTBody() {}
-  var cont = 0;
-  for (r = 0; r < 6; r++) {
-    var newRow = $("<tr>");
-    newRow.attr("id", "row" + r);
-    for (d = 0; d < 7; d++) {
-      var newCell = $("<td>");
-      var newSpanNum = $("<span>");
-      var newSpanText = $("<span>");
-      newSpanNum.attr("class", "dayNum");
-      newSpanText.attr("class", "dayText");
-      var rStr = String(r);
-      var dStr = String(d);
-      newSpanNum.text(rStr + dStr);
-      newSpanText.text("Text");
-      newCell.attr("class", "cell");
-      newCell.attr("id", "cell" + r + d);
-      newCell.append(newSpanNum);
-      newCell.append(newSpanText);
-      newRow.append(newCell);
-      cont++;
+  function createTBody() {
+    $("tbody").empty();
+    // Find the First Week Day of the Month
+    var firstDayFlag = false;
+    var lastDayFlag = 0;
+    var firstDayStr =
+      displayedDate.format("YYYY") + displayedDate.format("MM") + "01";
+    var firstDayMoment = moment(firstDayStr);
+    firstWeekDay = moment(firstDayStr).format("dddd");
+    var lastMonthDay = displayedDate.endOf("month");
+
+    // Define the Table Cell correspondent to the First Week Day
+    switch (firstWeekDay) {
+      case "Monday":
+        startCell = "cell00";
+        break;
+      case "Tuesday":
+        startCell = "cell01";
+        break;
+      case "Wednesday":
+        startCell = "cell02";
+        break;
+      case "Thursday":
+        startCell = "cell03";
+        break;
+      case "Friday":
+        startCell = "cell04";
+        break;
+      case "Saturday":
+        startCell = "cell05";
+        break;
+      case "Sunday":
+        startCell = "cell06";
+        break;
     }
-    $("tbody").append(newRow);
+
+    // Create the Table Cells
+    for (r = 0; r < 6; r++) {
+      var newRow = $("<tr>");
+      newRow.attr("id", "row" + r);
+      for (d = 0; d < 7; d++) {
+        var newCell = $("<td>");
+        var newSpanNumDiv = $("<div>");
+        var newSpanNum = $("<span>");
+        var newSpanText = $("<span>");
+        newSpanNumDiv.attr("class", "dayNumDiv input-group-prepend");
+        newSpanNum.attr("class", "dayNum input-group-text p-0");
+        newSpanText.attr("class", "dayText");
+
+        newSpanNumDiv.append(newSpanNum);
+        var rStr = String(r);
+        var dStr = String(d);
+        var compCell = "cell" + rStr + dStr;
+        newSpanText.text("");
+        if (startCell === compCell) {
+          firstDayFlag = true;
+        }
+        if (firstDayFlag) {
+          if (lastDayFlag != 2) {
+            newSpanNum.text(firstDayMoment.format("Do"));
+          }
+          firstDayMoment = firstDayMoment.add(1, "day");
+        }
+        newCell.attr("class", "cell");
+        newCell.attr("id", "cell" + r + d);
+        newCell.append(newSpanNumDiv);
+        newCell.append(newSpanText);
+        newRow.append(newCell);
+        if (lastDayFlag === 1) {
+          lastDayFlag = 2;
+        }
+
+        if (firstDayMoment.format("Do") === lastMonthDay.format("Do")) {
+          lastDayFlag = 1;
+        }
+      }
+
+      if (lastDayFlag != 3) {
+        $("tbody").append(newRow);
+      }
+      if (lastDayFlag === 2) {
+        lastDayFlag = 3;
+      }
+    }
   }
 
   /* ---------- Event listeners ---------- */
