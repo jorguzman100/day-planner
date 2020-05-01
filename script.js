@@ -54,33 +54,14 @@ $(document).ready(function () {
   ];
   var currentMonth = moment();
   var displayedDate = currentMonth;
-  var monthsChange = 1;
 
   init();
-  /* ---------- Event listeners ---------- */
-
-  $(".save").on("click", saveActivity);
-  $("td").mouseenter(function () {
-    $(this).css("background", "lightgray");
-  });
-
-  $("td").mouseleave(function () {
-    $(this).css("background", "white");
-  });
-
-  $("td").on("click", function () {
-    console.log($(this).text());
-  });
-
-  $("#prevY").on("click", changeDate);
-  $("#nextY").on("click", changeDate);
-  $("#prevM").on("click", changeDate);
-  $("#nextM").on("click", changeDate);
 
   /* ---------- Function declarations ---------- */
   function init() {
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
+    createTBody();
     displayActivities();
   }
 
@@ -106,7 +87,7 @@ $(document).ready(function () {
                   </div>`;
       $("#activities").append(divActWrap);
 
-      // Assign backgrpund format according to time of the day
+      // Assign background format according to time of the day
       agendaHour = parseInt(index + 8);
       var current = moment().hour();
       if (current > agendaHour) {
@@ -185,4 +166,50 @@ $(document).ready(function () {
     $("#month").text(displayedDate.format("MMMM"));
     console.log(displayedDate.format("MMM Do YY"));
   }
+
+  function createTBody() {}
+  var cont = 0;
+  for (r = 0; r < 6; r++) {
+    var newRow = $("<tr>");
+    newRow.attr("id", "row" + r);
+    for (d = 0; d < 7; d++) {
+      var newCell = $("<td>");
+      var newSpanNum = $("<span>");
+      var newSpanText = $("<span>");
+      newSpanNum.attr("class", "dayNum");
+      newSpanText.attr("class", "dayText");
+      var rStr = String(r);
+      var dStr = String(d);
+      newSpanNum.text(rStr + dStr);
+      newSpanText.text("Text");
+      newCell.attr("class", "cell");
+      newCell.attr("id", "cell" + r + d);
+      newCell.append(newSpanNum);
+      newCell.append(newSpanText);
+      newRow.append(newCell);
+      cont++;
+    }
+    $("tbody").append(newRow);
+  }
+
+  /* ---------- Event listeners ---------- */
+
+  $(".save").on("click", saveActivity);
+
+  $("td").mouseenter(function () {
+    $(this).css("background", "lightgray");
+  });
+
+  $("td").mouseleave(function () {
+    $(this).css("background", "white");
+  });
+
+  $("td").on("click", function () {
+    console.log($(this).text());
+  });
+
+  $("#prevY").on("click", changeDate);
+  $("#nextY").on("click", changeDate);
+  $("#prevM").on("click", changeDate);
+  $("#nextM").on("click", changeDate);
 });
