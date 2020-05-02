@@ -3,6 +3,14 @@
 /* ---------------------------------------- */
 
 /* ----------------- Global ----------------- */
+h1 {
+  text-align: center;
+}
+
+.card-header {
+  color: #0c5460;
+}
+
 .card-footer {
   padding: 0;
   height: 1.5rem;
@@ -14,6 +22,11 @@
 }
 
 /* ----------------- Month View ----------------- */
+#year,
+#month {
+  font-weight: bold;
+}
+
 .table {
   font-size: 0.6rem;
 }
@@ -71,11 +84,10 @@ th {
   border-radius: 4px;
 }
 
-/* ----------------- My Goals ----------------- */
-
 /* ----------------- Daily Planner ----------------- */
 #dayDate {
   background-color: #d1ecf1 !important;
+  font-weight: bold;
 }
 
 .time {
