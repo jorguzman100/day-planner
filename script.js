@@ -1,5 +1,6 @@
 $(document).ready(function () {
   /* ******************** Global variables ******************** */
+
   var activitiesArray = [
     {
       date: "",
@@ -68,18 +69,11 @@ $(document).ready(function () {
   var startCell;
   var countedDatesArray = [];
   var localStorageObjectsArray = [];
-  /*   var dayActivitiesCount = 0;
-  var dayActivitiesCountArray = [];
-  var dayActivitiesCountObject = {
-    date: "",
-    dayActivitiesCount: 0,
-  }; */
 
   init();
 
   /* ******************** Function declarations ******************** */
   function init() {
-    console.log("-------------- init() ---------------");
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
     countLocalStorageActivitiesDates();
@@ -87,11 +81,8 @@ $(document).ready(function () {
     displayDayDate();
   }
 
-  /* ---------- My Goals ---------- */
-
   /* ---------- Month View ---------- */
   function createTBody() {
-    console.log("createTBody()");
     // Empty previous table displayed
     $("tbody").empty();
 
@@ -129,9 +120,7 @@ $(document).ready(function () {
         break;
     }
 
-    // dayNum
     // Create the new Table Cells
-    console.log("localStorageObjectsArray: ", localStorageObjectsArray);
     for (r = 0; r < 6; r++) {
       var newRow = $("<tr>");
       newRow.attr("id", "row" + r);
@@ -166,34 +155,6 @@ $(document).ready(function () {
                 newCell.append(newSpanText);
               }
             });
-
-            // Display Activities
-            /* localStorageObjectsArray.forEach(function (localStorageObject) {
-              if (
-                localStorageObject.date ===
-                moment(newCell.attr("moment")).format("MMMM Do YYYY")
-              ) {
-                var newSpanText = $("<p>");
-                newSpanText.attr("class", "dayText");
-                newSpanText.text(localStorageObject.activity);
-                console.log(
-                  "Object date: ",
-                  localStorageObject.date,
-                  " time: ",
-                  localStorageObject.time
-                );
-                activitiesArray.forEach(function (activitiesArrayObject) {
-                  console.log(
-                    "activitiesArrayObject.time: ",
-                    activitiesArrayObject.time
-                  );
-                  if (activitiesArrayObject.time === localStorageObject.time) {
-                    console.log("Match");
-                    newCell.append(newSpanText);
-                  }
-                });
-              }
-            }); */
           }
           firstDayMoment = firstDayMoment.add(1, "day");
         }
@@ -222,7 +183,6 @@ $(document).ready(function () {
   }
 
   function countLocalStorageActivitiesDates() {
-    console.log("countLocalStorageActivitiesDates()");
     var datesArray = [];
     localStorageObjectsArray = [];
     for (i = 0; i < localStorage.length; i++) {
@@ -258,11 +218,10 @@ $(document).ready(function () {
       countedDatesObject.cnt = cnt;
       countedDatesArray.push(countedDatesObject);
     }
-    console.log("countedDatesArray: ", countedDatesArray);
+    // - End of Source -
   }
 
   function changeDate() {
-    console.log("changeDate()");
     switch ($(this).attr("id")) {
       case "nextY":
         displayedDate = displayedDate.add(1, "years");
@@ -291,7 +250,6 @@ $(document).ready(function () {
 
   /* ---------- Daily Planner ---------- */
   function displayDayDate() {
-    console.log("displayDayDate()");
     if ($("#dayDate").attr("moment") === undefined) {
       $("#dayDate").attr("moment", moment().format("MMMM Do YYYY"));
       $("#dayDate").text(moment().format("MMMM Do YYYY"));
@@ -306,7 +264,6 @@ $(document).ready(function () {
   }
 
   function displayActivities() {
-    console.log("displayActivities()");
     // Clear previous Dayly Planner Activities
     $("#activities").empty();
 
@@ -379,30 +336,16 @@ $(document).ready(function () {
           .css("background", "white");
       }
     });
-    /* // Assign background format according to day displayed
-    // REFERENCE: https://momentjscom.readthedocs.io/en/latest/moment/05-query/03-is-after/
-    var dayDateComp = $("#dayDate").attr("moment");
-    var momentComp = moment().format("MMMM Do YYYY");
-    console.log("dayDate: ", dayDateComp, " moment: ", momentComp);
-    if (dayDateComp === momentComp) {
-      console.log("equal");
-    } else if (dayDateComp > momentComp) {
-      console.log("future");
-    } else {
-      console.log("past");
-    } */
 
     $("#activities").hide();
     $("#activities").fadeIn(1000);
 
     // Update eventListeners
-    console.log("// Update eventListeners");
     clearEventListeners();
     eventListeners();
   }
 
   function saveActivity() {
-    console.log("saveActivity()");
     $(".activity-saved").fadeIn(1000);
     $(".activity-saved").fadeOut(1000);
 
@@ -440,7 +383,6 @@ $(document).ready(function () {
   /* ******************** Event listeners ******************** */
 
   function clearEventListeners() {
-    console.log("clearEventListeners()");
     // Clear previous eventListeners
     $(".save").unbind();
     $("td").unbind();
@@ -451,7 +393,6 @@ $(document).ready(function () {
   }
 
   function eventListeners() {
-    console.log("eventListeners()");
     // Update eventListeners
     $(".save").on("click", saveActivity);
 
