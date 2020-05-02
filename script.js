@@ -139,10 +139,10 @@ $(document).ready(function () {
         var newCell = $("<td>");
         var newSpanNumDiv = $("<div>");
         var newSpanNum = $("<p>");
-        // var newSpanText = $("<p>");
+        var newSpanText = $("<p>");
         newSpanNumDiv.attr("class", "dayNumDiv input-group-prepend");
         newSpanNum.attr("class", "dayNum");
-
+        newSpanText.attr("class", "dayText");
         newSpanNumDiv.append(newSpanNum);
         var rStr = String(r);
         var dStr = String(d);
@@ -157,7 +157,7 @@ $(document).ready(function () {
             newCell.attr("moment", momentStr);
 
             // Display Activities Count
-            /* countedDatesArray.forEach(function (countedDatesObject) {
+            countedDatesArray.forEach(function (countedDatesObject) {
               if (
                 countedDatesObject.current ===
                 moment(newCell.attr("moment")).format("MMMM Do YYYY")
@@ -165,10 +165,10 @@ $(document).ready(function () {
                 newSpanText.text(`Acts: ${countedDatesObject.cnt}`);
                 newCell.append(newSpanText);
               }
-            }); */
+            });
 
             // Display Activities
-            localStorageObjectsArray.forEach(function (localStorageObject) {
+            /* localStorageObjectsArray.forEach(function (localStorageObject) {
               if (
                 localStorageObject.date ===
                 moment(newCell.attr("moment")).format("MMMM Do YYYY")
@@ -193,7 +193,7 @@ $(document).ready(function () {
                   }
                 });
               }
-            });
+            }); */
           }
           firstDayMoment = firstDayMoment.add(1, "day");
         }
