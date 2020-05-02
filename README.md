@@ -1,6 +1,6 @@
 # 05_Day_Planner
 
-A calendar application that works as a Personal Agenda, allowing the user to register activities at any day. Supports your time planning wiht a month viewer.
+A calendar application that works as a Personal Agenda, allowing the user to register activities at any day. Supports user's time planning wiht a month viewer.
 Built with HTML, CSS, Bootstrap, JavaScript, jQuery and Moment.js.
 
 ## The Challenge
