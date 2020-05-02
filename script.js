@@ -66,51 +66,28 @@ $(document).ready(function () {
   var displayedDate = moment();
   var firstWeekDay;
   var startCell;
+  /*   var dayActivitiesCount = 0;
+  var dayActivitiesCountArray = [];
+  var dayActivitiesCountObject = {
+    date: "",
+    dayActivitiesCount: 0,
+  }; */
 
   init();
 
   /* ******************** Function declarations ******************** */
   function init() {
+    console.log("-------------- init() ---------------");
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
+    countLocalStorageActivitiesDates();
     createTBody();
     displayDayDate();
-    displayActivities();
-    clearEventListeners();
-    eventListeners();
   }
 
   /* ---------- My Goals ---------- */
 
   /* ---------- Month View ---------- */
-  function changeDate() {
-    console.log("changeDate()");
-    switch ($(this).attr("id")) {
-      case "nextY":
-        displayedDate = displayedDate.add(1, "years");
-        break;
-      case "prevY":
-        displayedDate = displayedDate.subtract(1, "years");
-        break;
-      case "nextM":
-        displayedDate = displayedDate.add(1, "months");
-        break;
-      case "prevM":
-        displayedDate = displayedDate.subtract(1, "months");
-        break;
-    }
-
-    // Update the Month View
-    $("#year").text(displayedDate.format("YYYY"));
-    $("#month").text(displayedDate.format("MMMM"));
-    createTBody();
-
-    // Update eventListeners
-    console.log("// Update eventListeners");
-    clearEventListeners();
-    eventListeners();
-  }
-
   function createTBody() {
     console.log("createTBody()");
     // Empty previous table displayed
@@ -150,6 +127,7 @@ $(document).ready(function () {
         break;
     }
 
+    // dayNum
     // Create the new Table Cells
     for (r = 0; r < 6; r++) {
       var newRow = $("<tr>");
@@ -157,10 +135,10 @@ $(document).ready(function () {
       for (d = 0; d < 7; d++) {
         var newCell = $("<td>");
         var newSpanNumDiv = $("<div>");
-        var newSpanNum = $("<span>");
+        var newSpanNum = $("<p>");
         var newSpanText = $("<span>");
         newSpanNumDiv.attr("class", "dayNumDiv input-group-prepend");
-        newSpanNum.attr("class", "dayNum input-group-text p-0");
+        newSpanNum.attr("class", "dayNum");
         newSpanText.attr("class", "dayText");
         newSpanNumDiv.append(newSpanNum);
         var rStr = String(r);
@@ -174,14 +152,23 @@ $(document).ready(function () {
         if (firstDayFlag) {
           if (lastDayFlag != 2) {
             newSpanNum.text(firstDayMoment.format("Do"));
+            newCell.attr("moment", momentStr);
+            countedDatesArray.forEach(function (countedDatesObject) {
+              if (
+                countedDatesObject.current ===
+                moment(newCell.attr("moment")).format("MMMM Do YYYY")
+              ) {
+                newSpanText.text(`Acts: ${countedDatesObject.cnt}`);
+              }
+            });
           }
           firstDayMoment = firstDayMoment.add(1, "day");
         }
         newCell.attr("class", "cell");
         newCell.attr("id", "cell" + r + d);
-        newCell.attr("moment", momentStr);
         newCell.append(newSpanNumDiv);
         newCell.append(newSpanText);
+
         newRow.append(newCell);
         if (lastDayFlag === 1) {
           lastDayFlag = 2;
@@ -199,6 +186,74 @@ $(document).ready(function () {
     }
     $("tbody").hide();
     $("tbody").fadeIn(1000);
+    countLocalStorageActivitiesDates();
+  }
+
+  var countedDatesArray = [];
+  function countLocalStorageActivitiesDates() {
+    console.log("countLocalStorageActivitiesDates()");
+    var datesArray = [];
+    for (i = 0; i < localStorage.length; i++) {
+      var localStorageKey = localStorage.key(i);
+      localStorageObject = JSON.parse(localStorage.getItem(localStorageKey));
+      datesArray.push(localStorageObject.date);
+    }
+
+    // Source: How to count duplicate value in an array in javascript
+    // https://stackoverflow.com/questions/19395257/how-to-count-duplicate-value-in-an-array-in-javascript
+    datesArray.sort();
+    var current = null;
+    var cnt = 0;
+    countedDatesArray = [];
+    for (var i = 0; i < datesArray.length; i++) {
+      if (datesArray[i] != current) {
+        if (cnt > 0) {
+          var countedDatesObject = {};
+          countedDatesObject.current = current;
+          countedDatesObject.cnt = cnt;
+          countedDatesArray.push(countedDatesObject);
+        }
+        current = datesArray[i];
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    if (cnt > 0) {
+      var countedDatesObject = {};
+      countedDatesObject.current = current;
+      countedDatesObject.cnt = cnt;
+      countedDatesArray.push(countedDatesObject);
+    }
+    console.log("countedDatesArray: ", countedDatesArray);
+  }
+
+  function changeDate() {
+    console.log("changeDate()");
+    switch ($(this).attr("id")) {
+      case "nextY":
+        displayedDate = displayedDate.add(1, "years");
+        break;
+      case "prevY":
+        displayedDate = displayedDate.subtract(1, "years");
+        break;
+      case "nextM":
+        displayedDate = displayedDate.add(1, "months");
+        break;
+      case "prevM":
+        displayedDate = displayedDate.subtract(1, "months");
+        break;
+    }
+
+    // Update the Month View
+    $("#year").text(displayedDate.format("YYYY"));
+    $("#month").text(displayedDate.format("MMMM"));
+    createTBody();
+
+    // Update eventListeners
+    console.log("// Update eventListeners");
+    clearEventListeners();
+    eventListeners();
   }
 
   /* ---------- Daily Planner ---------- */
@@ -253,6 +308,7 @@ $(document).ready(function () {
 
       spanTime.text(activitiesArray[index].time);
       buttonSave.append(activitiesArray[index].button);
+
       if ($("#dayDate").attr("moment") === activitiesArray[index].date) {
         inputActivity.attr("value", activitiesArray[index].activity);
       }
