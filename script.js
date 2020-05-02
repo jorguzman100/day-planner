@@ -136,7 +136,7 @@ $(document).ready(function () {
         var newCell = $("<td>");
         var newSpanNumDiv = $("<div>");
         var newSpanNum = $("<p>");
-        var newSpanText = $("<span>");
+        var newSpanText = $("<p>");
         newSpanNumDiv.attr("class", "dayNumDiv input-group-prepend");
         newSpanNum.attr("class", "dayNum");
         newSpanText.attr("class", "dayText");
@@ -144,7 +144,6 @@ $(document).ready(function () {
         var rStr = String(r);
         var dStr = String(d);
         var compCell = "cell" + rStr + dStr;
-        newSpanText.text("");
         var momentStr = firstDayMoment.toString();
         if (startCell === compCell) {
           firstDayFlag = true;
@@ -159,6 +158,7 @@ $(document).ready(function () {
                 moment(newCell.attr("moment")).format("MMMM Do YYYY")
               ) {
                 newSpanText.text(`Acts: ${countedDatesObject.cnt}`);
+                newCell.append(newSpanText);
               }
             });
           }
@@ -166,8 +166,7 @@ $(document).ready(function () {
         }
         newCell.attr("class", "cell");
         newCell.attr("id", "cell" + r + d);
-        newCell.append(newSpanNumDiv);
-        newCell.append(newSpanText);
+        newCell.prepend(newSpanNumDiv);
 
         newRow.append(newCell);
         if (lastDayFlag === 1) {

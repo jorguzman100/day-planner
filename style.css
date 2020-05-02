@@ -25,6 +25,7 @@
 .table td {
   padding: 3px;
   text-align: left;
+  height: 69px;
 }
 
 td span {
@@ -58,9 +59,16 @@ th {
 }
 
 .dayText {
-  font-size: 10px;
-  color: #0c5460;
+  font-size: 12px;
+  text-align: center;
   font-weight: bold;
+  color: white;
+  width: 50px;
+  height: 18px;
+  background-color: #17a2b8;
+  padding: 1px;
+  margin-bottom: 2px;
+  border-radius: 4px;
 }
 
 /* ----------------- My Goals ----------------- */
