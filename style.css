@@ -3,6 +3,11 @@ h1 {
   text-align: center;
 }
 
+h5 {
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
 .card-header {
   color: #0c5460;
 }

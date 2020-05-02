@@ -243,7 +243,6 @@ $(document).ready(function () {
     createTBody();
 
     // Update eventListeners
-    console.log("// Update eventListeners");
     clearEventListeners();
     eventListeners();
   }
