@@ -5,7 +5,7 @@ Built with HTML, CSS, Bootstrap, JavaScript, jQuery and Moment.js.
 
 ## The Challenge
 
-Create a simple calendar application that allows the user to save events for each hour of the day.
+Create a calendar application that allows the user to save events for each hour of the day.
 
 Main elements:
 
