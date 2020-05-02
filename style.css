@@ -60,6 +60,10 @@ th {
 /* ----------------- My Goals ----------------- */
 
 /* ----------------- Daily Planner ----------------- */
+#dayDate {
+  background-color: #d1ecf1 !important;
+}
+
 .time {
   min-width: 100px;
 }
