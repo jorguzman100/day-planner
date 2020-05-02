@@ -98,22 +98,12 @@ $(document).ready(function () {
       case "prevM":
         displayedDate = displayedDate.subtract(1, "months");
         break;
-      case "nextD":
-        displayedDate = displayedDate.add(1, "days");
-        break;
-      case "prevD":
-        displayedDate = displayedDate.subtract(1, "days");
-        break;
     }
 
     // Update the Month View
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
     createTBody();
-
-    // Update the Daily Planner
-    displayDayDate();
-    displayActivities();
 
     // Update eventListeners
     console.log("// Update eventListeners");
@@ -207,6 +197,8 @@ $(document).ready(function () {
         lastDayFlag = 3;
       }
     }
+    $("tbody").hide();
+    $("tbody").fadeIn(1000);
   }
 
   /* ---------- Daily Planner ---------- */
@@ -311,6 +303,7 @@ $(document).ready(function () {
       console.log("past");
     } */
 
+    $("#activities").hide();
     $("#activities").fadeIn(1000);
 
     // Update eventListeners
@@ -382,7 +375,5 @@ $(document).ready(function () {
     $("#nextY").on("click", changeDate);
     $("#prevM").on("click", changeDate);
     $("#nextM").on("click", changeDate);
-    $("#prevD").on("click", changeDate);
-    $("#nextD").on("click", changeDate);
   }
 });
