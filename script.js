@@ -84,6 +84,7 @@ $(document).ready(function () {
 
   /* ---------- Month View ---------- */
   function changeDate() {
+    console.log("changeDate()");
     switch ($(this).attr("id")) {
       case "nextY":
         displayedDate = displayedDate.add(1, "years");
@@ -101,11 +102,15 @@ $(document).ready(function () {
     $("#year").text(displayedDate.format("YYYY"));
     $("#month").text(displayedDate.format("MMMM"));
     createTBody();
+
+    // Update eventListeners
+    console.log("// Update eventListeners");
     clearEventListeners();
     eventListeners();
   }
 
   function createTBody() {
+    console.log("createTBody()");
     // Empty previous table displayed
     $("tbody").empty();
 
@@ -194,6 +199,7 @@ $(document).ready(function () {
 
   /* ---------- Daily Planner ---------- */
   function displayDayDate() {
+    console.log("displayDayDate()");
     if ($("#dayDate").attr("moment") === undefined) {
       $("#dayDate").attr("moment", moment().format("MMMM Do YYYY"));
       $("#dayDate").text(moment().format("MMMM Do YYYY"));
@@ -208,6 +214,7 @@ $(document).ready(function () {
   }
 
   function displayActivities() {
+    console.log("displayActivities()");
     // Clear previous Dayly Planner Activities
     $("#activities").empty();
 
@@ -279,10 +286,29 @@ $(document).ready(function () {
           .css("background", "white");
       }
     });
+    /* // Assign background format according to day displayed
+    // REFERENCE: https://momentjscom.readthedocs.io/en/latest/moment/05-query/03-is-after/
+    var dayDateComp = $("#dayDate").attr("moment");
+    var momentComp = moment().format("MMMM Do YYYY");
+    console.log("dayDate: ", dayDateComp, " moment: ", momentComp);
+    if (dayDateComp === momentComp) {
+      console.log("equal");
+    } else if (dayDateComp > momentComp) {
+      console.log("future");
+    } else {
+      console.log("past");
+    } */
+
     $("#activities").fadeIn(1000);
+
+    // Update eventListeners
+    console.log("// Update eventListeners");
+    clearEventListeners();
+    eventListeners();
   }
 
   function saveActivity() {
+    console.log("saveActivity()");
     $(".activity-saved").fadeIn(1000);
     $(".activity-saved").fadeOut(1000);
 
@@ -316,6 +342,7 @@ $(document).ready(function () {
   /* ******************** Event listeners ******************** */
 
   function clearEventListeners() {
+    console.log("clearEventListeners()");
     // Clear previous eventListeners
     $(".save").unbind();
     $("td").unbind();
@@ -326,6 +353,7 @@ $(document).ready(function () {
   }
 
   function eventListeners() {
+    console.log("eventListeners()");
     // Update eventListeners
     $(".save").on("click", saveActivity);
 
