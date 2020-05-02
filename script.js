@@ -66,6 +66,8 @@ $(document).ready(function () {
   var displayedDate = moment();
   var firstWeekDay;
   var startCell;
+  var countedDatesArray = [];
+  var localStorageObjectsArray = [];
   /*   var dayActivitiesCount = 0;
   var dayActivitiesCountArray = [];
   var dayActivitiesCountObject = {
@@ -129,6 +131,7 @@ $(document).ready(function () {
 
     // dayNum
     // Create the new Table Cells
+    console.log("localStorageObjectsArray: ", localStorageObjectsArray);
     for (r = 0; r < 6; r++) {
       var newRow = $("<tr>");
       newRow.attr("id", "row" + r);
@@ -136,10 +139,10 @@ $(document).ready(function () {
         var newCell = $("<td>");
         var newSpanNumDiv = $("<div>");
         var newSpanNum = $("<p>");
-        var newSpanText = $("<p>");
+        // var newSpanText = $("<p>");
         newSpanNumDiv.attr("class", "dayNumDiv input-group-prepend");
         newSpanNum.attr("class", "dayNum");
-        newSpanText.attr("class", "dayText");
+
         newSpanNumDiv.append(newSpanNum);
         var rStr = String(r);
         var dStr = String(d);
@@ -152,13 +155,43 @@ $(document).ready(function () {
           if (lastDayFlag != 2) {
             newSpanNum.text(firstDayMoment.format("Do"));
             newCell.attr("moment", momentStr);
-            countedDatesArray.forEach(function (countedDatesObject) {
+
+            // Display Activities Count
+            /* countedDatesArray.forEach(function (countedDatesObject) {
               if (
                 countedDatesObject.current ===
                 moment(newCell.attr("moment")).format("MMMM Do YYYY")
               ) {
                 newSpanText.text(`Acts: ${countedDatesObject.cnt}`);
                 newCell.append(newSpanText);
+              }
+            }); */
+
+            // Display Activities
+            localStorageObjectsArray.forEach(function (localStorageObject) {
+              if (
+                localStorageObject.date ===
+                moment(newCell.attr("moment")).format("MMMM Do YYYY")
+              ) {
+                var newSpanText = $("<p>");
+                newSpanText.attr("class", "dayText");
+                newSpanText.text(localStorageObject.activity);
+                console.log(
+                  "Object date: ",
+                  localStorageObject.date,
+                  " time: ",
+                  localStorageObject.time
+                );
+                activitiesArray.forEach(function (activitiesArrayObject) {
+                  console.log(
+                    "activitiesArrayObject.time: ",
+                    activitiesArrayObject.time
+                  );
+                  if (activitiesArrayObject.time === localStorageObject.time) {
+                    console.log("Match");
+                    newCell.append(newSpanText);
+                  }
+                });
               }
             });
           }
@@ -188,14 +221,15 @@ $(document).ready(function () {
     countLocalStorageActivitiesDates();
   }
 
-  var countedDatesArray = [];
   function countLocalStorageActivitiesDates() {
     console.log("countLocalStorageActivitiesDates()");
     var datesArray = [];
+    localStorageObjectsArray = [];
     for (i = 0; i < localStorage.length; i++) {
       var localStorageKey = localStorage.key(i);
       localStorageObject = JSON.parse(localStorage.getItem(localStorageKey));
       datesArray.push(localStorageObject.date);
+      localStorageObjectsArray.push(localStorageObject);
     }
 
     // Source: How to count duplicate value in an array in javascript
@@ -397,6 +431,10 @@ $(document).ready(function () {
 
     // Update activitiesArray
     activitiesArray[index] = activityWrap;
+    countLocalStorageActivitiesDates();
+    createTBody();
+    clearEventListeners();
+    eventListeners();
   }
 
   /* ******************** Event listeners ******************** */
