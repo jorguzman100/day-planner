@@ -1,7 +1,7 @@
 # 05_Day_Planner
 
 A calendar application that works as a Personal Agenda, allowing the user to register activities at any day. Supports user's time planning wiht a month viewer.
-Built with HTML, CSS, Bootstrap, JavaScript, jQuery and Moment.js.
+Built with HTML, CSS, Bootstrap, JavaScript and jQuery.
 
 ## The Challenge
 
@@ -24,7 +24,7 @@ In order to accomplish the challenge, the following steps were executed:
    - Mobile-first approach.
    - Responsive design for larger screen sizes.
 3. Search for assets (agenda references, icons, etc.)
-4. Read Moment.js documentation.
+4. Read JavaScript Date API documentation.
 5. Create Daily Planner functionality.
 6. Create Month View functionality.
 7. Apply semantic HTML.
@@ -50,9 +50,5 @@ You can access the deployed application with the GitHup Pages link:
 ## Tools and other References
 
 [Bootstrap](https://getbootstrap.com/)
-
-[Font Awesome](https://fontawesome.com/)
-
-[Moment.js](https://momentjs.com/)
 
 [Markup Validation Service](https://validator.w3.org/)

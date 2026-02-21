@@ -5,6 +5,14 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link id="siteFavicon" rel="icon" type="image/svg+xml" href="./Assets/fluxday-logo-light.svg" />
+  <link id="appleTouchIcon" rel="apple-touch-icon" href="./Assets/fluxday-logo-light.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@500;700;800&display=swap"
+    rel="stylesheet" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -12,119 +20,114 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="./style.css" />
-  <title>Personal Agenda</title>
+  <title>FluxDay Planner</title>
 </head>
 
 <body>
-  <header class="alert alert-info">
-    <h1>Personal Agenda</h1>
-  </header>
-  <!-- Container -->
-  <div class="container">
+  <div class="ambient ambient-left" aria-hidden="true"></div>
+  <div class="ambient ambient-right" aria-hidden="true"></div>
 
-    <div class="row row-cols-1 row-cols-lg-2">
-      <div class="col">
-
-        <!-- Month View -->
-        <section class="row mb-4">
-          <div class="col">
-            <div class="card text-center">
-              <div class="card-header">
-                <h5>Month View</h5>
-              </div>
-              <div class="card-body p-2">
-                <div style="display: block;">
-
-                  <!-- Year and Month with Change Buttons -->
-                  <div class="date alert alert-info m-0 p-0" role="alert" style="display: block;">
-                    <span id="prevY">
-                      <i class="fas fa-angle-double-left"></i>
-                    </span>
-                    <span id="year"></span>
-                    <span id="nextY">
-                      <i class="fas fa-angle-double-right"></i>
-                    </span> <br>
-                    <span id="prevM">
-                      <i class="fas fa-angle-double-left"></i>
-                    </span>
-                    <span id="month"></span>
-                    <span id="nextM">
-                      <i class="fas fa-angle-double-right"></i>
-                    </span>
-                  </div> <!-- /Year and Month with Change Buttons -->
-
-                  <table class="table table-bordered ">
-                    <thead class="thead-light">
-
-                      <!-- The Calendar Month -->
-                      <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody> <!-- The Calendar Month -->
-                  </table>
-                </div>
-              </div>
-
-              <!-- Month View Footer -->
-              <div class="card-footer text-muted">
-                <div class="goal-saved alert alert-info m-0 p-0" role="alert" style="display: none;">
-                  <strong>Activity saved</strong>
-                </div>
-              </div> <!-- /Month View Footer -->
-            </div>
-          </div>
-        </section> <!-- /Month View -->
-      </div>
-
-      <div class="col goals_and_daylyPlanner">
-
-        <!-- Daily Planner -->
-        <section class="row">
-          <div class="col daylyPlanner">
-            <div class="card text-center">
-              <div class="card-header">
-                <h5>Daily Planner</h5>
-              </div>
-              <div class="card-body">
-                <div class="plannerDayDates alert alert-info m-0 p-0" role="alert" style="display: block;">
-                  <span id="dayDate"></span>
-                </div>
-
-                <!-- Day Activities are Displayed Here-->
-                <div id="activities" style="display: none;">
-
-                </div>
-              </div>
-
-              <!-- Daily Planner Footer -->
-              <div class="card-footer text-muted">
-                <div class="activity-saved alert alert-info m-0 p-0" role="alert" style="display: none;">
-                  <strong>Activity saved</strong>
-                </div>
-              </div> <!-- /Daily Planner Footer -->
-            </div>
-          </div>
-        </section> <!-- /Daily Planner -->
+  <header class="main-navbar">
+    <div class="nav-inner">
+      <a class="brand" href="./index.html" aria-label="FluxDay Planner home">
+        <img id="brandLogo" class="brand-logo" src="./Assets/fluxday-logo-light.svg" alt="FluxDay logo" />
+        <div class="brand-copy">
+          <p class="brand-kicker">Premium Day Planning</p>
+          <h1>FluxDay</h1>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <p class="brand-slogan">Plan sharper. Move faster. Finish proud.</p>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch color mode" aria-pressed="false">
+          <span class="theme-toggle-pulse" aria-hidden="true"></span>
+          <span class="theme-toggle-label">Dark Mode</span>
+        </button>
       </div>
     </div>
-  </div> <!-- /Container -->
+  </header>
+
+  <main class="app-shell">
+    <div class="planner-grid">
+      <!-- Month View -->
+      <section class="view-card month-view-card" aria-label="Month view">
+        <div class="view-card-header">
+          <div>
+            <h2>Month View</h2>
+            <p>Scan your month and jump to any day in one click.</p>
+          </div>
+          <div class="status-dot" aria-hidden="true"></div>
+        </div>
+
+        <div class="view-card-body">
+          <div class="calendar-toolbar" role="group" aria-label="Calendar navigation controls">
+            <div class="toolbar-row">
+              <button id="prevY" class="nav-btn" type="button" aria-label="Previous year">&#8249;</button>
+              <span id="year"></span>
+              <button id="nextY" class="nav-btn" type="button" aria-label="Next year">&#8250;</button>
+            </div>
+            <div class="toolbar-row">
+              <button id="prevM" class="nav-btn" type="button" aria-label="Previous month">&#8249;</button>
+              <span id="month"></span>
+              <button id="nextM" class="nav-btn" type="button" aria-label="Next month">&#8250;</button>
+            </div>
+          </div>
+
+          <div class="calendar-table-wrap">
+            <table class="table calendar-table">
+              <thead>
+                <tr>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                  <th>Sun</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="view-card-footer">
+          <div class="goal-saved toast-inline" role="status" aria-live="polite">
+            <strong>Activity saved</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daily Planner -->
+      <section class="view-card daily-view-card" aria-label="Daily planner view">
+        <div class="view-card-header">
+          <div>
+            <h2>Daily Planner</h2>
+            <p>Capture key tasks and lock your focus hour by hour.</p>
+          </div>
+          <div class="status-dot" aria-hidden="true"></div>
+        </div>
+
+        <div class="view-card-body">
+          <div class="plannerDayDates day-badge" role="status" aria-live="polite">
+            <span id="dayDate"></span>
+          </div>
+
+          <div id="activities"></div>
+        </div>
+
+        <div class="view-card-footer">
+          <div class="activity-saved toast-inline" role="status" aria-live="polite">
+            <strong>Activity saved</strong>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <!-- jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/e211982880.js" crossorigin="anonymous"></script>
-
-  <!-- Moments.js -->
-  <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Main js -->
   <script src="./script.js"></script>
