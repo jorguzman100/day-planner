@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  /* ******************** Global variables ******************** */
-
   var STORAGE_PREFIX = "dayPlanner.activityWrap";
   var THEME_STORAGE_KEY = "dayPlanner.theme";
   var LOGO_LIGHT_PATH = "./Assets/fluxday-logo-light.svg";
@@ -29,7 +27,6 @@ $(document).ready(function () {
 
   init();
 
-  /* ******************** Function declarations ******************** */
   function init() {
     initializeTheme();
     bindThemeToggle();
@@ -197,9 +194,8 @@ $(document).ready(function () {
     }
   }
 
-  /* ---------- Month View ---------- */
   function createTBody() {
-    // Empty previous table displayed
+    // Rebuild the month grid each time the displayed month changes.
     $("tbody").empty();
 
     var year = displayedDate.getFullYear();
@@ -207,11 +203,10 @@ $(document).ready(function () {
     var firstDayOfMonth = new Date(year, month, 1);
     var daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Monday-first grid offset: Monday=0 ... Sunday=6
+    // Monday-first grid offset: Monday = 0 ... Sunday = 6
     var startOffset = (firstDayOfMonth.getDay() + 6) % 7;
     var dayCounter = 1;
 
-    // Create the new Table Cells
     for (var r = 0; r < 6; r++) {
       var newRow = $("<tr>");
       var rowHasDay = false;
@@ -238,7 +233,6 @@ $(document).ready(function () {
           newSpanNum.text(formatOrdinal(dayCounter));
           newCell.attr("moment", formattedDate);
 
-          // Display Activities Count
           countedDatesArray.forEach(function (countedDatesObject) {
             if (countedDatesObject.current === formattedDate) {
               newSpanText.text(`Acts: ${countedDatesObject.cnt}`);
@@ -289,8 +283,7 @@ $(document).ready(function () {
       localStorageObjectsArray.push(localStorageObject);
     }
 
-    // Source: How to count duplicate value in an array in javascript
-    // https://stackoverflow.com/questions/19395257/how-to-count-duplicate-value-in-an-array-in-javascript
+    // Count how many saved activities exist for each date (used in Month View badges).
     datesArray.sort();
     var current = null;
     var cnt = 0;
@@ -317,7 +310,6 @@ $(document).ready(function () {
       finalCountedDatesObject.cnt = cnt;
       countedDatesArray.push(finalCountedDatesObject);
     }
-    // - End of Source -
   }
 
   function changeDate() {
@@ -352,17 +344,14 @@ $(document).ready(function () {
         break;
     }
 
-    // Update the Month View
     $("#year").text(displayedDate.getFullYear());
     $("#month").text(MONTH_NAMES[displayedDate.getMonth()]);
     createTBody();
 
-    // Update eventListeners
     clearEventListeners();
     eventListeners();
   }
 
-  /* ---------- Daily Planner ---------- */
   function displayDayDate() {
     if ($("#dayDate").attr("moment") === undefined) {
       var today = formatPlannerDate(new Date());
@@ -394,12 +383,10 @@ $(document).ready(function () {
   }
 
   function displayActivities() {
-    // Clear previous Dayly Planner Activities
     $("#activities").empty();
 
-    // Create the new Daily Planner Activities
+    // Build the daily planner rows for the selected date.
     activitiesArray.forEach(function (activity, index) {
-      // Load activitiesArray from localStorage
       var activityLoad = getActivityStorageKey(index);
       var activityWrapLoaded = getStoredActivity(activityLoad);
       if (activityWrapLoaded != null) {
@@ -407,7 +394,6 @@ $(document).ready(function () {
         activitiesArray[index].activity = activityWrapLoaded.activity;
       }
 
-      // Create the activity-wraps and display info from activitiesArray
       var divActWrap = $("<div>");
       var divPrepend = $("<div>");
       var spanTime = $("<span>");
@@ -440,7 +426,7 @@ $(document).ready(function () {
       divActWrap.append(divAppend);
       $("#activities").append(divActWrap);
 
-      // Assign background format according to time of the day
+      // Highlight each row based on whether the hour is past, current, or upcoming.
       var agendaHour = WORKDAY_START_HOUR + index;
       var current = new Date().getHours();
       var activityInput = $("#activities").children().eq(index).children().eq(1);
@@ -458,7 +444,6 @@ $(document).ready(function () {
     $("#activities").hide();
     $("#activities").fadeIn(1000);
 
-    // Update eventListeners
     clearEventListeners();
     eventListeners();
   }
@@ -467,7 +452,6 @@ $(document).ready(function () {
     $(".activity-saved").fadeIn(1000);
     $(".activity-saved").fadeOut(1000);
 
-    // Save to localStorage
     var index = $(this).attr("data-index");
     var date = $("#dayDate").attr("moment");
     var time = $("#activities")
@@ -489,7 +473,6 @@ $(document).ready(function () {
     var activitySafe = getActivityStorageKey(index);
     localStorage.setItem(activitySafe, activityWrapText);
 
-    // Update activitiesArray
     activitiesArray[index] = activityWrap;
     countLocalStorageActivitiesDates();
     createTBody();
@@ -497,10 +480,7 @@ $(document).ready(function () {
     eventListeners();
   }
 
-  /* ******************** Event listeners ******************** */
-
   function clearEventListeners() {
-    // Clear previous eventListeners
     $(".save").unbind();
     $("td").unbind();
     $("#prevY").unbind();
@@ -510,7 +490,7 @@ $(document).ready(function () {
   }
 
   function eventListeners() {
-    // Update eventListeners
+    // Rebind handlers after the calendar/planner DOM is rebuilt.
     $(".save").on("click", saveActivity);
 
     $("td").mouseenter(function () {
